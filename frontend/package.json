@@ -11,7 +11,7 @@
   "dependencies": {
     "genlayer-js": "^1.1.7",
     "lucide-react": "^0.469.0",
-    "next": "15.1.3",
+    "next": "15.1.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -20,7 +20,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.1.3",
+    "eslint-config-next": "15.1.9",
     "typescript": "^5"
   }
 }
