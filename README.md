@@ -8,7 +8,7 @@
 
 <br />
 
-![Status](https://img.shields.io/badge/status-building-yellow?style=flat-square)
+![Status](https://img.shields.io/badge/status-contract%20deployed-yellow?style=flat-square)
 ![Networks](https://img.shields.io/badge/networks-StudioNet-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)
 ![Stack](https://img.shields.io/badge/stack-React%20%2B%20Next.js%20%2B%20GenVM-1C1B18?style=flat-square)
@@ -92,7 +92,7 @@ distinct from `LATE` ("it showed up, just after the deadline").
 
 | Network | Address | Explorer |
 |---|---|---|
-| StudioNet | *not yet deployed* | — |
+| StudioNet | `0x9bbB29978d437c70b9148362dB2C77149d84C439` | [View](https://explorer-studio.genlayer.com/address/0x9bbB29978d437c70b9148362dB2C77149d84C439) |
 
 </div>
 
@@ -140,13 +140,18 @@ LICENSE                             MIT
 The deterministic canonicalization layer (`_canonicalize`, evidence-URL
 derivation, CIK/ticker validation) is covered by 22 passing unit tests run
 against a mocked `genlayer` module — these do not require a live GenVM
-runtime and were run directly in this environment. **Not yet
-live-verified:** the contract has not been deployed to StudioNet or
-exercised in Run and Debug, so `gl.eq_principle.prompt_comparative`'s
-actual cross-validator agreement behavior on real EDGAR data, and the
-`SATISFIED`/`LATE`/`DELINQUENT` branches specifically, are unconfirmed
-against a live network. See [`docs/deployment.md`](./docs/deployment.md)
-for the exact remaining steps.
+runtime and were run directly in this environment.
+
+**Deployed to StudioNet** at
+`0x9bbB29978d437c70b9148362dB2C77149d84C439`. **Not yet confirmed by a
+live end-to-end run:** `register_obligation` → `open_check` →
+`assess_check` has not yet been exercised against the deployed contract in
+this repo's own history, so `gl.eq_principle.prompt_comparative`'s actual
+cross-validator agreement behavior on real EDGAR data, and the
+`SATISFIED`/`LATE`/`DELINQUENT` branches specifically, remain unconfirmed
+against the live network. Run the lifecycle in Studio's Run and Debug
+panel and update this section with the real result once done — see
+[`docs/deployment.md`](./docs/deployment.md).
 
 <br />
 
