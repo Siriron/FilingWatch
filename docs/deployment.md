@@ -2,26 +2,31 @@
 
 ## Status
 
-**Not yet deployed.** No contract address, no live Vercel URL exist yet —
-this section will be filled in once deployment actually happens. Nothing
-below should be read as claiming a live deployment.
+**Contract deployed to StudioNet:**
+`0x9bbB29978d437c70b9148362dB2C77149d84C439`
+([explorer](https://explorer-studio.genlayer.com/address/0x9bbB29978d437c70b9148362dB2C77149d84C439)).
+
+**Frontend not yet deployed** — no live Vercel URL exists yet. The
+contract address is already wired into `frontend/config/chains.ts`, so
+deploying the frontend is the only remaining step for a live app.
+
+**Not yet run against the live contract:** a full
+`register_obligation` → `open_check` → `assess_check` lifecycle. See the
+"Known live-testing gaps" section below before treating any verdict
+branch as confirmed.
 
 ## Contract
 
-1. Open [studio.genlayer.com/contracts](https://studio.genlayer.com/contracts)
-   (or `genvm-lint check contracts/FilingWatch.py` locally first).
-2. Deploy `contracts/FilingWatch.py` to StudioNet. No constructor arguments.
-3. Confirm line 1's pragma hash matches
-   `py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6` before
-   deploying — an older or `"py-genlayer:test"` pragma fails schema load.
-4. Record the deployed address and deploy transaction hash here once known.
-5. Recommended first live check in Studio's Run and Debug panel before
-   wiring the frontend: call `register_obligation` with a real CIK (Apple's
-   is `0000320193`), a deadline a few minutes in the future for testing
-   purposes only (a real obligation should use a realistic filing deadline),
-   then `open_check` and `assess_check` once the deadline passes, and
-   confirm `get_check` returns a `SATISFIED`/`LATE`/`DELINQUENT`/`UNRESOLVED`
-   verdict with clean stderr.
+1. ~~Open [studio.genlayer.com/contracts](https://studio.genlayer.com/contracts)~~ — done, deployed at the address above.
+2. ~~Deploy `contracts/FilingWatch.py` to StudioNet.~~ — done.
+3. Recommended next step, before relying on this for a real submission:
+   run the full lifecycle in Studio's Run and Debug panel. Call
+   `register_obligation` with a real CIK (Apple's is `0000320193`), a
+   deadline a few minutes in the future for testing purposes only (a real
+   obligation should use a realistic filing deadline), then `open_check`
+   and `assess_check` once the deadline passes, and confirm `get_check`
+   returns a `SATISFIED`/`LATE`/`DELINQUENT`/`UNRESOLVED` verdict with
+   clean stderr.
 
 ## Frontend
 
@@ -46,9 +51,10 @@ cd frontend && npm run build
 
 ## Known live-testing gaps (state plainly, do not round up)
 
-- The contract has been syntax-checked and audited against the full
-  mandatory pre-deploy checklist, but **has not yet been deployed to
-  StudioNet or exercised in Run and Debug**. In particular:
+- The contract has been syntax-checked, audited against the full
+  mandatory pre-deploy checklist, and deployed to StudioNet — but **has
+  not yet been exercised end-to-end in Run and Debug or from the
+  frontend**. In particular:
   - `gl.eq_principle.prompt_comparative`'s actual cross-validator agreement
     behavior on real EDGAR JSON has not been observed live — only the
     deterministic `_canonicalize()` layer has been unit-tested.
